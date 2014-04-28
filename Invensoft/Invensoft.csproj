@@ -189,6 +189,7 @@
     <Content Include="Content\simplex-bootstrap.css" />
     <Content Include="Content\simplex-bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -329,6 +330,13 @@
     <Compile Include="Account\ResetPasswordConfirmation.aspx.designer.cs">
       <DependentUpon>ResetPasswordConfirmation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Address.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
     </Compile>
@@ -438,6 +446,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExceptionUtility.cs" />
     <Compile Include="Models\Illustration.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
     </Compile>

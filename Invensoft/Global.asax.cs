@@ -44,7 +44,7 @@ namespace Invensoft
                 if (ex.InnerException != null)
                 {
                     ex = new Exception(ex.InnerException.Message);
-                    Server.Transfer("ErrorPage.aspx?handler=Application_Error%20-%20Global.aspx", true);
+                    Server.Transfer("ErrorPage.aspx?handler=Application_Error%20-%20Global.asax", true);
                 }
             }
         }

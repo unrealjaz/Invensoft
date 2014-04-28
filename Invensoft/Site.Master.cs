@@ -75,9 +75,14 @@ namespace Invensoft
 
         public IQueryable<ProductCategory> GetCategories()
         {
-            var _db = new Invensoft.Models.AdventureWorks2012Entities();
-            IQueryable<ProductCategory> query = _db.ProductCategories;
-            return query;
+            if (Server.GetLastError() == null)
+            {
+                var _db = new Invensoft.Models.AdventureWorks2012Entities();
+                IQueryable<ProductCategory> query = _db.ProductCategories;
+                return query;
+            }
+
+            return null;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
