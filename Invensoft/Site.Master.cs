@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Invensoft.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
@@ -69,6 +71,13 @@ namespace Invensoft
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public IQueryable<ProductCategory> GetCategories()
+        {
+            var _db = new Invensoft.Models.AdventureWorks2012Entities();
+            IQueryable<ProductCategory> query = _db.ProductCategories;
+            return query;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
