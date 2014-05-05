@@ -10,33 +10,51 @@
 namespace Invensoft {
     
     
-    public partial class SiteMaster {
+    public partial class SalesReport {
         
         /// <summary>
-        /// prodlink control.
+        /// exportLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor prodlink;
+        protected global::System.Web.UI.WebControls.Label exportLabel;
         
         /// <summary>
-        /// saleslink control.
+        /// exportOptions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor saleslink;
+        protected global::System.Web.UI.WebControls.DropDownList exportOptions;
         
         /// <summary>
-        /// MainContent control.
+        /// exportTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button exportTo;
+        
+        /// <summary>
+        /// salesReportGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView salesReportGrid;
+        
+        /// <summary>
+        /// reportSales control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.Reporting.WebForms.ReportViewer reportSales;
     }
 }

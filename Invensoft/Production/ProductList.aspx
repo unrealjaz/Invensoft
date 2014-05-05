@@ -1,6 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="Invensoft.ProductList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div id="categoryMenu" style="text-align: center">
+        <asp:ListView ID="categoryList"
+            ItemType="Invensoft.Models.ProductCategory"
+            runat="server"
+            SelectMethod="GetCategories">
+            <ItemTemplate>
+                <b style="font-size: large; font-style: normal">
+                    <a href="<%#:GetRouteUrl("ProductsByCategoryRoute", new {categoryName = Item.Name}) %>">
+                        <%#:Item.Name %>
+                    </a>
+                </b>
+            </ItemTemplate>
+            <ItemSeparatorTemplate>|</ItemSeparatorTemplate>
+        </asp:ListView>
+        <br />
+    </div>
+
     <section>
         <div>
             <hgroup>
@@ -32,7 +50,7 @@
                             <tr>
                                 <td>
                                     <a href="<%#: GetRouteUrl("ProductByNameRoute", new {productName = Item.Name}) %>">
-                                        <img src="data:image/png;base64,<%#:Convert.ToBase64String(Item.ProductProductPhotoes.Where(p=>p.ProductID==Item.ProductID).First().ProductPhoto.ThumbNailPhoto) %>"  style="border: solid" />
+                                        <img src="data:image/png;base64,<%#:Convert.ToBase64String(Item.ProductProductPhotoes.Where(p=>p.ProductID==Item.ProductID).First().ProductPhoto.ThumbNailPhoto) %>" style="border: solid" />
                                     </a>
                                 </td>
                             </tr>

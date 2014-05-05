@@ -70,20 +70,31 @@ namespace Invensoft
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        public IQueryable<ProductCategory> GetCategories()
-        {
-            if (Server.GetLastError() == null)
+            if (HttpContext.Current.User.IsInRole("Administrator"))
             {
-                var _db = new Invensoft.Models.AdventureWorks2012Entities();
-                IQueryable<ProductCategory> query = _db.ProductCategories;
-                return query;
-            }
 
-            return null;
+            }
+            else if (HttpContext.Current.User.IsInRole("Production"))
+            {
+                prodlink.Visible = true;
+            }
+            else if (HttpContext.Current.User.IsInRole("Sales"))
+            {
+                saleslink.Visible = true;
+            }
         }
+
+        //public IQueryable<ProductCategory> GetCategories()
+        //{
+        //    if (Server.GetLastError() == null)
+        //    {
+        //        var _db = new Invensoft.Models.AdventureWorks2012Entities();
+        //        IQueryable<ProductCategory> query = _db.ProductCategories;
+        //        return query;
+        //    }
+
+        //    return null;
+        //}
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {

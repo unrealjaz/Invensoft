@@ -183,6 +183,7 @@
         <AssociationConnector Association="AdventureWorks2012Model.FK_Store_SalesPerson_SalesPersonID" ManuallyRouted="false" />
         <AssociationConnector Association="AdventureWorks2012Model.FK_SalesTerritoryHistory_SalesTerritory_TerritoryID" ManuallyRouted="false" />
         <AssociationConnector Association="AdventureWorks2012Model.FK_SpecialOfferProduct_SpecialOffer_SpecialOfferID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AdventureWorks2012Model.vSalesByYear" Width="1.5" PointX="21.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

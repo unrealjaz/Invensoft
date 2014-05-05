@@ -18,6 +18,11 @@ namespace Invensoft
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             RegisterCustomRoutes(RouteTable.Routes);
+
+            RoleActions roleActions = new RoleActions();
+            roleActions.CreateAdmin();
+            roleActions.CreateProductionUser();
+            roleActions.CreateSalesUser();
         }
 
         void RegisterCustomRoutes(RouteCollection routes)

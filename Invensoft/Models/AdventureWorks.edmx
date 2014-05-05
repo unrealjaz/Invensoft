@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AdventureWorks2012Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AdventureWorks2012Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AWBuildVersion">
           <Key>
             <PropertyRef Name="SystemInformationID" />
@@ -1241,6 +1241,18 @@ warning 6002: The table/view 'AdventureWorks2012.Sales.vPersonDemographics' does
           <Property Name="Occupation" Type="nvarchar" MaxLength="30" />
           <Property Name="HomeOwnerFlag" Type="bit" />
           <Property Name="NumberCarsOwned" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AdventureWorks2012.Sales.vSalesByYear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSalesByYear">
+          <Key>
+            <PropertyRef Name="ProductNumber" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ProductNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalesQty" Type="int" />
+          <Property Name="SalesTotal" Type="numeric" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AdventureWorks2012.Sales.vSalesPerson' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2854,6 +2866,14 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
     [vPersonDemographics].[NumberCarsOwned] AS [NumberCarsOwned]
     FROM [Sales].[vPersonDemographics] AS [vPersonDemographics]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vSalesByYear" EntityType="Self.vSalesByYear" store:Type="Views" store:Schema="Sales">
+            <DefiningQuery>SELECT 
+    [vSalesByYear].[ProductNumber] AS [ProductNumber], 
+    [vSalesByYear].[Name] AS [Name], 
+    [vSalesByYear].[SalesQty] AS [SalesQty], 
+    [vSalesByYear].[SalesTotal] AS [SalesTotal]
+    FROM [Sales].[vSalesByYear] AS [vSalesByYear]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vSalesPerson" EntityType="Self.vSalesPerson" store:Type="Views" store:Schema="Sales">
             <DefiningQuery>SELECT 
     [vSalesPerson].[BusinessEntityID] AS [BusinessEntityID], 
@@ -3289,8 +3309,7 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
             <End Role="WorkOrderRouting" EntitySet="WorkOrderRouting" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdventureWorks2012Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -6279,24 +6298,24 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
             <End Role="SpecialOfferProduct" EntitySet="SpecialOfferProducts" />
           </AssociationSet>
           <FunctionImport Name="ufnGetContactInformation" ReturnType="Collection(AdventureWorks2012Model.ufnGetContactInformation_Result)" IsComposable="true">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspGetBillOfMaterials" ReturnType="Collection(AdventureWorks2012Model.uspGetBillOfMaterials_Result)">
             <Parameter Name="StartProductID" Mode="In" Type="Int32" />
             <Parameter Name="CheckDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="uspGetEmployeeManagers" ReturnType="Collection(AdventureWorks2012Model.uspGetEmployeeManagers_Result)">
-            <Parameter Name="BusinessEntityID" Mode="In" Type="Int32" />
+          <Parameter Name="BusinessEntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspGetManagerEmployees" ReturnType="Collection(AdventureWorks2012Model.uspGetManagerEmployees_Result)">
-            <Parameter Name="BusinessEntityID" Mode="In" Type="Int32" />
+          <Parameter Name="BusinessEntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspGetWhereUsedProductID" ReturnType="Collection(AdventureWorks2012Model.uspGetWhereUsedProductID_Result)">
             <Parameter Name="StartProductID" Mode="In" Type="Int32" />
             <Parameter Name="CheckDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="uspLogError">
-            <Parameter Name="ErrorLogID" Mode="InOut" Type="Int32" />
+          <Parameter Name="ErrorLogID" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspPrintError" />
           <FunctionImport Name="uspSearchCandidateResumes">
@@ -6328,6 +6347,7 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
             <Parameter Name="MaritalStatus" Mode="In" Type="String" />
             <Parameter Name="Gender" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="vSalesByYears" EntityType="AdventureWorks2012Model.vSalesByYear" />
         </EntityContainer>
         <ComplexType Name="uspGetBillOfMaterials_Result">
           <Property Type="Int32" Name="ProductAssemblyID" Nullable="true" />
@@ -6367,6 +6387,16 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
           <Property Type="Int16" Name="BOMLevel" Nullable="true" />
           <Property Type="Int32" Name="RecursionLevel" Nullable="true" />
         </ComplexType>
+        <EntityType Name="vSalesByYear">
+          <Key>
+            <PropertyRef Name="ProductNumber" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SalesQty" Type="Int32" />
+          <Property Name="SalesTotal" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7712,6 +7742,16 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
           <FunctionImportMapping FunctionImportName="uspUpdateEmployeeHireInfo" FunctionName="AdventureWorks2012Model.Store.uspUpdateEmployeeHireInfo" />
           <FunctionImportMapping FunctionImportName="uspUpdateEmployeeLogin" FunctionName="AdventureWorks2012Model.Store.uspUpdateEmployeeLogin" />
           <FunctionImportMapping FunctionImportName="uspUpdateEmployeePersonalInfo" FunctionName="AdventureWorks2012Model.Store.uspUpdateEmployeePersonalInfo" />
+          <EntitySetMapping Name="vSalesByYears">
+            <EntityTypeMapping TypeName="AdventureWorks2012Model.vSalesByYear">
+              <MappingFragment StoreEntitySet="vSalesByYear">
+                <ScalarProperty Name="SalesTotal" ColumnName="SalesTotal" />
+                <ScalarProperty Name="SalesQty" ColumnName="SalesQty" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

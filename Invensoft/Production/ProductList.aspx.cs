@@ -16,6 +16,18 @@ namespace Invensoft
 
         }
 
+        public IQueryable<ProductCategory> GetCategories()
+        {
+            if (Server.GetLastError() == null)
+            {
+                var _db = new Invensoft.Models.AdventureWorks2012Entities();
+                IQueryable<ProductCategory> query = _db.ProductCategories;
+                return query;
+            }
+
+            return null;
+        }
+
         public IQueryable<Product> GetProducts([QueryString("id")] int? categoryId, [RouteData] string categoryName)
         {
             var _db = new Invensoft.Models.AdventureWorks2012Entities();
