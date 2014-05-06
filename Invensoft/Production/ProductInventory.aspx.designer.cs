@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Invensoft {
+namespace Invensoft.Production {
     
     
-    public partial class SalesReport {
+    public partial class ProductInventory {
         
         /// <summary>
-        /// yearsLabel control.
+        /// locationLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label yearsLabel;
+        protected global::System.Web.UI.WebControls.Label locationLabel;
         
         /// <summary>
-        /// years control.
+        /// location control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList years;
+        protected global::System.Web.UI.WebControls.DropDownList location;
         
         /// <summary>
         /// exportLabel control.
@@ -58,21 +58,21 @@ namespace Invensoft {
         protected global::System.Web.UI.WebControls.Button exportTo;
         
         /// <summary>
-        /// salesReportGrid control.
+        /// productInventoryReportGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView salesReportGrid;
+        protected global::System.Web.UI.WebControls.GridView productInventoryReportGrid;
         
         /// <summary>
-        /// reportSales control.
+        /// productInventoryReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer reportSales;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer productInventoryReport;
     }
 }

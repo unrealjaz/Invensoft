@@ -47,6 +47,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -216,6 +217,7 @@
       <LastGenOutput>AdventureWorks.cs</LastGenOutput>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="Production\ProductInventory.aspx" />
     <Content Include="Production\Web.config" />
     <Content Include="Sales\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -530,8 +532,18 @@
     <Compile Include="Models\ProductVendor.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vProductInventory.cs">
+      <DependentUpon>AdventureWorks.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vSalesByYear.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ProductInventory.aspx.cs">
+      <DependentUpon>ProductInventory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\ProductInventory.aspx.designer.cs">
+      <DependentUpon>ProductInventory.aspx</DependentUpon>
     </Compile>
     <Compile Include="Production\ProductList.aspx.cs">
       <DependentUpon>ProductList.aspx</DependentUpon>
@@ -729,6 +741,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Production\ProductInventory.rdlc" />
     <EmbeddedResource Include="Sales\Sales.rdlc" />
   </ItemGroup>
   <PropertyGroup>

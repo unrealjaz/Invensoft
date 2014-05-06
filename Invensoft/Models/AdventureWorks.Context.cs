@@ -118,6 +118,7 @@ namespace Invensoft.Models
         public virtual DbSet<vStoreWithContact> vStoreWithContacts { get; set; }
         public virtual DbSet<vStoreWithDemographic> vStoreWithDemographics { get; set; }
         public virtual DbSet<vSalesByYear> vSalesByYears { get; set; }
+        public virtual DbSet<vProductInventory> vProductInventories { get; set; }
     
         [DbFunction("AdventureWorks2012Entities", "ufnGetContactInformation")]
         public virtual IQueryable<ufnGetContactInformation_Result> ufnGetContactInformation(Nullable<int> personID)

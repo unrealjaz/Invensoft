@@ -280,24 +280,6 @@ warning 6005: The data type 'hierarchyid' is currently not supported for the tar
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6005: The data type 'hierarchyid' is currently not supported for the target Entity Framework version; the column 'AdventureWorks2012.Production.Document' in the table 'DocumentNode' was excluded.
-warning 6031: The column 'DocumentNode' on the table/view 'AdventureWorks2012.Production.Document' was excluded, and is a key column.  The table/view has been excluded.  Please fix the entity in the schema file, and uncomment.
-        <EntityType Name="Document">
-          <Property Name="DocumentLevel" Type="smallint" StoreGeneratedPattern="Computed" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Owner" Type="int" Nullable="false" />
-          <Property Name="FolderFlag" Type="bit" Nullable="false" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="400" Nullable="false" />
-          <Property Name="FileExtension" Type="nvarchar" MaxLength="8" Nullable="false" />
-          <Property Name="Revision" Type="nchar" MaxLength="5" Nullable="false" />
-          <Property Name="ChangeNumber" Type="int" Nullable="false" />
-          <Property Name="Status" Type="tinyint" Nullable="false" />
-          <Property Name="DocumentSummary" Type="nvarchar(max)" />
-          <Property Name="Document" Type="varbinary(max)" />
-          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-        </EntityType>-->
         <EntityType Name="Illustration">
           <Key>
             <PropertyRef Name="IllustrationID" />
@@ -1086,6 +1068,22 @@ warning 6002: The table/view 'AdventureWorks2012.Production.vProductAndDescripti
           <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'AdventureWorks2012.Production.vProductInventory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vProductInventory">
+          <Key>
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ProductNumber" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="Quantity" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'AdventureWorks2012.Production.vProductModelCatalogDescription' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vProductModelCatalogDescription">
           <Key>
@@ -1253,6 +1251,7 @@ warning 6002: The table/view 'AdventureWorks2012.Sales.vSalesByYear' does not ha
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SalesQty" Type="int" />
           <Property Name="SalesTotal" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Year" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'AdventureWorks2012.Sales.vSalesPerson' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1580,9 +1579,6 @@ warning 6002: The table/view 'AdventureWorks2012.Sales.vStoreWithDemographics' d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_Document_Employee_Owner" />-->
         <Association Name="FK_EmailAddress_Person_BusinessEntityID">
           <End Role="Person" Type="Self.Person" Multiplicity="1" />
           <End Role="EmailAddress" Type="Self.EmailAddress" Multiplicity="*" />
@@ -1799,9 +1795,6 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_ProductDocument_Document_DocumentNode" />-->
         <Association Name="FK_ProductDocument_Product_ProductID">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="ProductDocument" Type="Self.ProductDocument" Multiplicity="0..1" />
@@ -2754,6 +2747,15 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
     [vProductAndDescription].[Description] AS [Description]
     FROM [Production].[vProductAndDescription] AS [vProductAndDescription]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vProductInventory" EntityType="Self.vProductInventory" store:Type="Views" store:Schema="Production">
+            <DefiningQuery>SELECT 
+    [vProductInventory].[Quantity] AS [Quantity], 
+    [vProductInventory].[Name] AS [Name], 
+    [vProductInventory].[ProductNumber] AS [ProductNumber], 
+    [vProductInventory].[Location] AS [Location], 
+    [vProductInventory].[LocationID] AS [LocationID]
+    FROM [Production].[vProductInventory] AS [vProductInventory]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vProductModelCatalogDescription" EntityType="Self.vProductModelCatalogDescription" store:Type="Views" store:Schema="Production">
             <DefiningQuery>SELECT 
     [vProductModelCatalogDescription].[ProductModelID] AS [ProductModelID], 
@@ -2871,7 +2873,8 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
     [vSalesByYear].[ProductNumber] AS [ProductNumber], 
     [vSalesByYear].[Name] AS [Name], 
     [vSalesByYear].[SalesQty] AS [SalesQty], 
-    [vSalesByYear].[SalesTotal] AS [SalesTotal]
+    [vSalesByYear].[SalesTotal] AS [SalesTotal], 
+    [vSalesByYear].[Year] AS [Year]
     FROM [Sales].[vSalesByYear] AS [vSalesByYear]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vSalesPerson" EntityType="Self.vSalesPerson" store:Type="Views" store:Schema="Sales">
@@ -6348,6 +6351,7 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
             <Parameter Name="Gender" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="vSalesByYears" EntityType="AdventureWorks2012Model.vSalesByYear" />
+          <EntitySet Name="vProductInventories" EntityType="AdventureWorks2012Model.vProductInventory" />
         </EntityContainer>
         <ComplexType Name="uspGetBillOfMaterials_Result">
           <Property Type="Int32" Name="ProductAssemblyID" Nullable="true" />
@@ -6396,6 +6400,21 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SalesQty" Type="Int32" />
           <Property Name="SalesTotal" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vProductInventory">
+          <Key>
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ProductNumber" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="Quantity" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationID" Type="Int16" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -7745,10 +7764,22 @@ error 6004: The table 'AdventureWorks2012.Production.Document' is referenced by 
           <EntitySetMapping Name="vSalesByYears">
             <EntityTypeMapping TypeName="AdventureWorks2012Model.vSalesByYear">
               <MappingFragment StoreEntitySet="vSalesByYear">
+                <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="SalesTotal" ColumnName="SalesTotal" />
                 <ScalarProperty Name="SalesQty" ColumnName="SalesQty" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vProductInventories">
+            <EntityTypeMapping TypeName="AdventureWorks2012Model.vProductInventory">
+              <MappingFragment StoreEntitySet="vProductInventory">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

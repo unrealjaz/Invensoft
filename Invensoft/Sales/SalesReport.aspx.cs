@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Invensoft.Models;
 using System.IO;
 using Microsoft.Reporting.WebForms;
+using System.Web.ModelBinding;
 
 namespace Invensoft
 {
@@ -42,7 +43,7 @@ namespace Invensoft
 
             reportSales.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
             reportSales.LocalReport.ReportPath = Server.MapPath("~/Sales/Sales.rdlc");
-            reportSales.LocalReport.DataSources.Add(new ReportDataSource("dsSales", GetSalesReport()));
+            reportSales.LocalReport.DataSources.Add(new ReportDataSource("dsSales", GetSalesReport(Convert.ToInt32(years.SelectedValue))));
 
             byte[] bytes = reportSales.LocalReport.Render(exportOptions.SelectedValue, null, out mimeType, out encoding, out extension, out streamids, out warnings);
 
@@ -54,71 +55,36 @@ namespace Invensoft
             Response.BinaryWrite(bytes);
             Response.Flush();
             Response.End();
-
-            //FileStream fs = new FileStream(@"C:\SalesReport.xls", FileMode.Create);
-            //fs.Write(bytes, 0, bytes.Length);
-            //fs.Close();
-            //reportSales.LocalReport.DataSources.Clear();
-            //reportSales.LocalReport.DataSources.Add()
-
-            //Response.Clear();
-            //Response.Buffer = true;
-            //Response.AddHeader("content-disposition", "attachment;filename=SalesReport.xlsx");
-            //Response.Charset = "";
-            //Response.ContentType = "application/ms-excel";
-
-            //using (StringWriter sw = new StringWriter())
-            //{
-            //    HtmlTextWriter hw = new HtmlTextWriter(sw);
-            //    salesReportGrid.RenderControl(hw);
-            //    Response.Write(sw.ToString());
-            //    Response.End();
-            //}
         }
 
-        public IQueryable<vSalesByYear> GetSalesReport()
+        public IQueryable GetYears()
         {
             var _db = new Invensoft.Models.AdventureWorks2012Entities();
 
+            var query = (from y in _db.vSalesByYears
+                         group y by y.Year into g
+                         select new { Year = g.Key });
 
-            /*
-             SELECT [ProductNumber], [Name], SUM([OrderQty]) Quantity, SUM([LineTotal]) TotalCost
-        FROM [AdventureWorks2012].[Sales].[SalesOrderDetail] d inner join
-             [AdventureWorks2012].[Sales].[SalesOrderHeader] h on
-             d.SalesOrderID = h.SalesOrderID
-             inner join [AdventureWorks2012].[Production].[Product] p
-             on d.ProductID = p.ProductID
-             GROUP BY [ProductNumber], [Name]
-             order by [ProductNumber]
-             */
+            return query.OrderBy(y => y.Year);
+        }
 
+        public IQueryable<vSalesByYear> GetSalesReport([Control("years")] int? year)
+        {
+            var _db = new Invensoft.Models.AdventureWorks2012Entities();
 
+            IQueryable<vSalesByYear> query = _db.vSalesByYears;
 
-            //var query = from d in _db.SalesOrderDetails
-            //            join h in _db.SalesOrderHeaders on d.SalesOrderID equals h.SalesOrderID
-            //            join p in _db.Products on d.ProductID equals p.ProductID
-            //            group d by d.ProductID into g
-            //            select new
-            //            {
-            //                ProductNumber = (from pr in _db.Products where pr.ProductID == g.Key select new { pr.ProductNumber }),
-            //                Name = (from pr in _db.Products where pr.ProductID == g.Key select new { pr.Name }),
-            //                Quantity = g.Sum(q => q.OrderQty),
-            //                SalesTotal = g.Sum(q => q.LineTotal)
-            //            };
-
-            IQueryable<vSalesByYear> query = _db.vSalesByYears.OrderBy(s => s.ProductNumber);
-
-            //if (categoryId.HasValue && categoryId > 0)
-            // {
-            //     query = query.Where(p => p.ProductSubcategoryID == categoryId);
-            // }
+            if (year.HasValue && year > 0)
+            {
+                query = query.Where(p => p.Year == year);
+            }
 
             // if (!String.IsNullOrEmpty(categoryName))
             // {
             //     query = query.Where(p => String.Compare(p.ProductSubcategory.ProductCategory.Name, categoryName) == 0);
             // }
 
-            return query;
+            return query.OrderBy(s => s.ProductNumber);
         }
     }
 }

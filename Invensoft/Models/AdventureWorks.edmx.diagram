@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="4fc52153acbe45f7a34b09862cbb1783" Name="Diagram1">
-        <EntityTypeShape EntityType="AdventureWorks2012Model.AWBuildVersion" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdventureWorks2012Model.AWBuildVersion" Width="1.5" PointX="1" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AdventureWorks2012Model.DatabaseLog" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AdventureWorks2012Model.ErrorLog" Width="1.5" PointX="4.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AdventureWorks2012Model.Department" Width="1.5" PointX="12.75" PointY="42.625" IsExpanded="true" />
@@ -184,6 +184,7 @@
         <AssociationConnector Association="AdventureWorks2012Model.FK_SalesTerritoryHistory_SalesTerritory_TerritoryID" ManuallyRouted="false" />
         <AssociationConnector Association="AdventureWorks2012Model.FK_SpecialOfferProduct_SpecialOffer_SpecialOfferID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AdventureWorks2012Model.vSalesByYear" Width="1.5" PointX="21.375" PointY="21.75" />
+        <EntityTypeShape EntityType="AdventureWorks2012Model.vProductInventory" Width="1.5" PointX="23.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

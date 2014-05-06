@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Inven</title>
+    <title><%: Page.Title %> - InvenSoft</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -55,6 +55,7 @@
                             <a id="prodlink" runat="server" visible="false" href="#" class="dropdown-toggle" data-toggle="dropdown">Production<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a runat="server" href="~/Production/ProductList.aspx">Products</a></li>
+                                <li><a runat="server" href="~/Production/ProductInventory.aspx">Product Inventory</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -75,7 +76,7 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account"> <%: Context.User.Identity.GetUserName()  %> </a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>

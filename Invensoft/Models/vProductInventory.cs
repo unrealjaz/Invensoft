@@ -12,12 +12,12 @@ namespace Invensoft.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vSalesByYear
+    public partial class vProductInventory
     {
-        public string ProductNumber { get; set; }
+        public short Quantity { get; set; }
         public string Name { get; set; }
-        public Nullable<int> SalesQty { get; set; }
-        public Nullable<decimal> SalesTotal { get; set; }
-        public Nullable<int> Year { get; set; }
+        public string ProductNumber { get; set; }
+        public string Location { get; set; }
+        public short LocationID { get; set; }
     }
 }
