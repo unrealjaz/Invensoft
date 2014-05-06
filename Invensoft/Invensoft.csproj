@@ -224,9 +224,11 @@
       <LastGenOutput>AdventureWorks.cs</LastGenOutput>
     </Content>
     <Content Include="Admin\Web.config" />
+    <Content Include="Production\ProductDetails.aspx" />
     <Content Include="Production\ProductInventory.aspx" />
     <Content Include="Production\Web.config" />
     <Content Include="Sales\Web.config" />
+    <None Include="Properties\PublishProfiles\invensoft.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Production\ProductList.aspx" />
     <Content Include="Sales\SalesReport.aspx" />
@@ -546,6 +548,13 @@
     </Compile>
     <Compile Include="Models\vSalesByYear.cs">
       <DependentUpon>AdventureWorks.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Production\ProductDetails.aspx.cs">
+      <DependentUpon>ProductDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Production\ProductDetails.aspx.designer.cs">
+      <DependentUpon>ProductDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Production\ProductInventory.aspx.cs">
       <DependentUpon>ProductInventory.aspx</DependentUpon>

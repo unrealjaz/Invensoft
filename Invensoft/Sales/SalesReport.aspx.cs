@@ -15,9 +15,11 @@ namespace Invensoft
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //reportSales.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-            //reportSales.LocalReport.ReportPath = Server.MapPath("~/Sales.rdlc");
-            //reportSales.LocalReport.DataSources.Add(new ReportDataSource("Sales", GetSalesReport()));
+            if(!IsPostBack)
+            {
+                years.DataBind();
+                years.Items.Insert(0, "-- Select Year --");
+            }
         }
 
         protected void exportTo_Click(object sender, EventArgs e)

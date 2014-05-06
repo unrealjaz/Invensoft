@@ -30,13 +30,19 @@ namespace Invensoft
             routes.MapPageRoute(
                 "ProductsByCategoryRoute",
                 "Category/{categoryName}",
-                "~/ProductList.aspx"
+                "~/Production/ProductList.aspx"
                 );
 
             routes.MapPageRoute(
                 "ProductByNameRoute",
                 "Product/{productName}",
-                "~/ProductDetails.aspx"
+                "~/Production/ProductDetails.aspx"
+                );
+
+            routes.MapPageRoute(
+                "ProductById",
+                "Product/{productId}",
+                "~/Production/ProductDetails.aspx"
                 );
         }
 
@@ -49,7 +55,7 @@ namespace Invensoft
                 if (ex.InnerException != null)
                 {
                     ex = new Exception(ex.InnerException.Message);
-                    Server.Transfer("ErrorPage.aspx?handler=Application_Error%20-%20Global.asax", true);
+                    //Server.Transfer("ErrorPage.aspx?handler=Application_Error%20-%20Global.asax", true);
                 }
             }
         }

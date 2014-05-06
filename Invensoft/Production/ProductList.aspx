@@ -49,14 +49,16 @@
                         <table>
                             <tr>
                                 <td>
-                                    <a href="<%#: GetRouteUrl("ProductByNameRoute", new {productName = Item.Name}) %>">
+                                    <%--<a href="<%#: GetRouteUrl("ProductById", new {productId = Item.ProductID}) %>">--%>
+                                    <a href="../Production/ProductDetails.aspx?productId=<%#: Item.ProductID %>">
                                         <img src="data:image/png;base64,<%#:Convert.ToBase64String(Item.ProductProductPhotoes.Where(p=>p.ProductID==Item.ProductID).First().ProductPhoto.ThumbNailPhoto) %>" style="border: solid" />
                                     </a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<%#: GetRouteUrl("ProductByNameRoute", new {productName = Item.Name}) %>">
+                                    <%--<a href="<%#: GetRouteUrl("ProductByNameRoute", new {productName = Item.Name}) %>">--%>
+                                    <a href="../Production/ProductDetails.aspx?productId=<%#: Item.ProductID %>">
                                         <span>
                                             <%#: Item.Name %>
                                         </span>
@@ -70,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<%#: GetRouteUrl("ProductByNameRoute", new { productName = Item.Name}) %>"></a>
+                                    <%--<a href="<%#: GetRouteUrl("ProductByNameRoute", new { productName = Item.Name}) %>"></a>--%>
                                 </td>
                             </tr>
                         </table>

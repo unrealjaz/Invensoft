@@ -14,7 +14,11 @@ namespace Invensoft.Production
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                location.DataBind();
+                location.Items.Insert(0, "-- Select Location --");
+            }
         }
         public IQueryable<Location> GetLocations()
         {
